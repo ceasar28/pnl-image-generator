@@ -1,18 +1,14 @@
 FROM ghcr.io/puppeteer/puppeteer:22.13.1
 
-
-# Ensure pnpm is installed
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN pnpm install --frozen-lockfile
-RUN pnpm ci
+RUN npm ci
 COPY . .
-RUN pnpm run build
+RUN npx prisma generate
+RUN npm run build
 # Start the server using the production build
-CMD ["pnpm", "run", "start:prod"]
+CMD ["npm", "run", "start:prod"]
