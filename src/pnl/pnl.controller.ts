@@ -13,7 +13,7 @@ export class PnlController {
     // res.set('Content-Type', 'image/png');
     // res.send(pnlImage);
 
-    console.log(pnlImage);
+    // console.log(pnlImage);
     return pnlImage;
   }
 }

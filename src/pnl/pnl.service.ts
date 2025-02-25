@@ -38,8 +38,8 @@ export class PnlService {
       // close the browser
       await browser.close();
 
-      console.log(screenshot);
-      console.log(typeof screenshot);
+      // console.log(screenshot);
+      // console.log(typeof screenshot);
 
       if (!Buffer.isBuffer(screenshot)) {
         throw new Error('Invalid image buffer');
