@@ -1,11 +1,16 @@
 FROM ghcr.io/puppeteer/puppeteer:22.13.1
 
+
+# Ensure pnpm is installed
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+RUN pnpm install --frozen-lockfile
 RUN pnpm ci
 COPY . .
 RUN pnpm run build
